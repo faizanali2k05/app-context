@@ -1,0 +1,28 @@
+[package]
+name = "app-context-derive"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish = false
+description = "Derive explicit typed sub-state extraction for app-context"
+readme = "README.md"
+documentation = "https://docs.rs/app-context-derive"
+keywords = ["context", "derive", "state", "typed"]
+categories = ["rust-patterns"]
+include = ["src/**", "README.md", "LICENSE-*", "Cargo.toml", "CHANGELOG.md"]
+
+[lib]
+proc-macro = true
+
+[dependencies]
+syn = { version = "2", features = ["full"] }
+quote = "1"
+proc-macro2 = "1"
+proc-macro-crate = "3"
+
+[package.metadata.docs.rs]
+all-features = true
+
+[lints]
+workspace = true

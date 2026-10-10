@@ -1,0 +1,51 @@
+[package]
+name = "app-context"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish = false
+description = "Immutable, typed, Arc-backed application state with explicit extraction and scoped overrides"
+readme = "README.md"
+documentation = "https://docs.rs/app-context"
+keywords = ["context", "state", "dependency", "typed", "application"]
+categories = ["rust-patterns", "web-programming"]
+include = ["src/**", "examples/**", "README.md", "LICENSE-*", "Cargo.toml", "CHANGELOG.md"]
+
+[features]
+default = []
+derive = ["dep:app-context-derive"]
+axum = ["dep:axum"]
+actix = ["dep:actix-web"]
+tonic = ["dep:tonic"]
+
+[dependencies]
+app-context-derive = { version = "0.1.0", path = "../app-context-derive", optional = true }
+axum = { version = "0.8.9", default-features = false, optional = true }
+actix-web = { version = "4.13", default-features = false, optional = true }
+tonic = { version = "0.14.6", default-features = false, optional = true }
+
+[dev-dependencies]
+criterion = { version = "0.5.1", default-features = false, features = ["cargo_bench_support"] }
+trybuild = "1.0"
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+tower = { version = "0.5", features = ["util"] }
+
+[[bench]]
+name = "context"
+harness = false
+
+[[example]]
+name = "axum_app"
+required-features = ["axum", "derive"]
+
+[[example]]
+name = "tonic_service"
+required-features = ["tonic", "derive"]
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
+
+[lints]
+workspace = true

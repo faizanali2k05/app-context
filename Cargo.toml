@@ -1,0 +1,13 @@
+[workspace]
+resolver = "3"
+members = ["crates/app-context", "crates/app-context-derive"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.88"
+license = "MIT OR Apache-2.0"
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+missing_docs = "deny"
