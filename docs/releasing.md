@@ -6,7 +6,7 @@ verification or use --allow-dirty/--no-verify. Obtain a verified canonical repos
 URL and review the security reporting policy. Do not invent ownership or URLs.
 
 1. Verify supported platform/MSRV CI, feature tests, rustdoc/examples, UI diagnostics,
-   dependency/security checks and package contents. Inspect RELEASE_CHECKLIST.md.
+   dependency/security checks and package contents.
 2. Check crates.io names and owner lists using official registry endpoints. A missing
    name may still be reserved; final registry publication decides availability.
 3. Check secure Cargo authentication without printing token contents. Authenticate
@@ -18,9 +18,9 @@ URL and review the security reporting policy. Do not invent ownership or URLs.
 6. Wait until the exact derive version is available through the registry. Then package,
    verify and dry-run app-context (including derive-enabled extraction using the
    packaged registry dependency) before publishing it. All features must resolve.
-7. Confirm exact registry versions and downloadable artifacts. Record results in
-   STATUS.md and CHANGELOG.md. Never retry a publish without first checking whether
-   it succeeded despite a client error.
+7. Confirm exact registry versions and downloadable artifacts. Record the release
+   in CHANGELOG.md and a versioned release receipt under `docs/`. Never retry a
+   publish without first checking whether it succeeded despite a client error.
 
 Core packaging cannot fully verify a not-yet-published derive dependency through
 the registry; do not label this gate passed merely because local path builds pass.

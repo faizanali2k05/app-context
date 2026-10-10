@@ -13,6 +13,7 @@ them with TRYBUILD=overwrite cargo test -p app-context --test ui --all-features.
 
 Benchmark changes with cargo bench -p app-context --bench context. Release packages
 must contain the full license texts and a verified repository URL. Never publish
-from an unchecked or dirty release checkout. See RELEASE_CHECKLIST.md.
+from an unchecked or dirty release checkout. Follow the release procedure in
+[`docs/releasing.md`](docs/releasing.md).
 
 Contributions are accepted under MIT OR Apache-2.0, without an additional CLA.
