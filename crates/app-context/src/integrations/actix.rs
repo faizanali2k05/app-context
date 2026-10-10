@@ -11,8 +11,11 @@ use std::{
 };
 
 /// Owned typed sub-state extracted from Actix application data.
-#[derive(Debug, Clone)]
-pub struct ContextState<T>(pub T);
+#[derive(Clone)]
+pub struct ContextState<T>(
+    /// The owned dependency or sub-state returned by `FromContext`.
+    pub T,
+);
 
 impl<T> ContextState<T> {
     /// Consume the wrapper, returning the extracted value.
@@ -43,5 +46,14 @@ impl<T: FromContext> FromRequest for ContextState<T> {
                     .map_err(|_| ErrorInternalServerError("application state unavailable"))
             });
         ready(result)
+    }
+}
+
+impl<T> std::fmt::Debug for ContextState<T> {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter
+            .debug_struct("ContextState")
+            .field("type", &std::any::type_name::<T>())
+            .finish_non_exhaustive()
     }
 }

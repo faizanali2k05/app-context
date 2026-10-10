@@ -1,3 +1,4 @@
+//! tonic service verification for app-context.
 use app_context::{
     Context, FromContext,
     tonic::{ContextInterceptor, extract},

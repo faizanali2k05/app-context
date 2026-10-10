@@ -34,6 +34,7 @@
 //! ```
 
 #![forbid(unsafe_code)]
+#![doc = include_str!("../README.md")]
 
 use std::{
     any::{Any, TypeId, type_name},
@@ -285,5 +286,51 @@ impl<T: Send + Sync + 'static> FromContext for Arc<T> {
 impl FromContext for Context {
     fn from_context(context: &Context) -> Result<Self, ContextError> {
         Ok(context.clone())
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn invalid_private_entry_fails_closed_without_panicking() {
+        // Protect the retrieval failure behavior if an internal regression ever
+        // pairs a key with the wrong erased value; public builders cannot do this.
+        let entries = HashMap::from([(
+            TypeId::of::<u32>(),
+            Entry {
+                value: Arc::new(7_u64),
+                name: "u32",
+            },
+        )]);
+        let context = Context {
+            entries: Arc::new(entries),
+        };
+        assert_eq!(
+            context.get::<u32>(),
+            Err(ContextError::Missing { type_name: "u32" })
+        );
+        assert_eq!(
+            context.get_ref::<u32>(),
+            Err(ContextError::Missing { type_name: "u32" })
+        );
+    }
+
+    #[test]
+    fn debug_type_order_is_independent_of_insertion_order() {
+        let first = Context::builder()
+            .with(1_u32)
+            .unwrap()
+            .with(true)
+            .unwrap()
+            .build();
+        let second = Context::builder()
+            .with(false)
+            .unwrap()
+            .with(2_u32)
+            .unwrap()
+            .build();
+        assert_eq!(format!("{first:?}"), format!("{second:?}"));
     }
 }

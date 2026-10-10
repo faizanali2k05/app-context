@@ -1,3 +1,4 @@
+//! derive verification for app-context.
 #![cfg(feature = "derive")]
 use app_context::{Context, ContextError, FromContext};
 use std::{marker::PhantomData, sync::Arc};
@@ -68,4 +69,21 @@ fn derives_propagate_missing_errors() {
         Context::new().extract::<Tuple>(),
         Err(ContextError::Missing { type_name: "u32" })
     ));
+}
+
+#[test]
+fn macro_resolves_renamed_dependency_in_an_independent_consumer() {
+    let manifest = std::path::Path::new(env!("CARGO_MANIFEST_DIR"));
+    let output = std::process::Command::new(env!("CARGO"))
+        .args(["run", "--offline", "--quiet", "--manifest-path"])
+        .arg(manifest.join("tests/fixtures/renamed/Cargo.toml"))
+        .arg("--target-dir")
+        .arg(manifest.join("../../target/renamed-consumer"))
+        .output()
+        .unwrap();
+    assert!(
+        output.status.success(),
+        "{}",
+        String::from_utf8_lossy(&output.stderr)
+    );
 }

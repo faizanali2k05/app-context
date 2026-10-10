@@ -1,3 +1,4 @@
+//! frameworks verification for app-context.
 #[cfg(feature = "axum")]
 mod axum_tests {
     use app_context::{Context, axum::ContextState};
@@ -60,12 +61,13 @@ mod axum_tests {
     #[test]
     fn wrapper_into_inner() {
         assert_eq!(ContextState(7).into_inner(), 7);
+        assert!(!format!("{:?}", ContextState(String::from("TOP_SECRET"))).contains("TOP_SECRET"));
     }
 }
 
 #[cfg(feature = "actix")]
 mod actix_tests {
-    use actix_web::{App, http::StatusCode, test, web};
+    use actix_web::{App, http::StatusCode, test as actix_test, web};
     use app_context::{Context, actix::ContextState};
     use std::sync::Arc;
     async fn handler(state: ContextState<Arc<String>>) -> String {
@@ -78,16 +80,17 @@ mod actix_tests {
             .with(String::from("hello"))
             .unwrap()
             .build();
-        let app = test::init_service(
+        let app = actix_test::init_service(
             App::new()
                 .app_data(web::Data::new(context))
                 .route("/", web::get().to(handler)),
         )
         .await;
         let response =
-            test::call_service(&app, test::TestRequest::get().uri("/").to_request()).await;
+            actix_test::call_service(&app, actix_test::TestRequest::get().uri("/").to_request())
+                .await;
         assert_eq!(response.status(), StatusCode::OK);
-        assert_eq!(&test::read_body(response).await[..], b"hello");
+        assert_eq!(&actix_test::read_body(response).await[..], b"hello");
     }
 
     #[tokio::test]
@@ -97,12 +100,15 @@ mod actix_tests {
             if let Some(context) = context {
                 app = app.app_data(web::Data::new(context));
             }
-            let app = test::init_service(app).await;
-            let response =
-                test::call_service(&app, test::TestRequest::get().uri("/").to_request()).await;
+            let app = actix_test::init_service(app).await;
+            let response = actix_test::call_service(
+                &app,
+                actix_test::TestRequest::get().uri("/").to_request(),
+            )
+            .await;
             assert_eq!(response.status(), StatusCode::INTERNAL_SERVER_ERROR);
             assert_eq!(
-                &test::read_body(response).await[..],
+                &actix_test::read_body(response).await[..],
                 b"application state unavailable"
             );
         }
@@ -111,6 +117,7 @@ mod actix_tests {
     #[test]
     fn wrapper_into_inner() {
         assert_eq!(ContextState(7).into_inner(), 7);
+        assert!(!format!("{:?}", ContextState(String::from("TOP_SECRET"))).contains("TOP_SECRET"));
     }
 }
 

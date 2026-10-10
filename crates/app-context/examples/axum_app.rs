@@ -1,3 +1,4 @@
+//! axum app verification for app-context.
 use app_context::{Context, FromContext, axum::ContextState};
 use axum::{
     Router,

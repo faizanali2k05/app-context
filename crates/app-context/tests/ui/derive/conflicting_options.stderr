@@ -1,0 +1,5 @@
+error: only one context option is allowed per field
+ --> tests/ui/derive/conflicting_options.rs:3:33
+  |
+3 | struct State { #[context(clone, default)] value: u32 }
+  |                                 ^^^^^^^

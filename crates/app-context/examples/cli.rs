@@ -1,3 +1,4 @@
+//! cli verification for app-context.
 use app_context::{Context, ContextError};
 
 struct Settings {

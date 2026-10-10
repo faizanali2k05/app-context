@@ -1,0 +1,5 @@
+error: FromContext can only be derived for structs
+ --> tests/ui/derive/enum.rs:3:6
+  |
+3 | enum State { One }
+  |      ^^^^^

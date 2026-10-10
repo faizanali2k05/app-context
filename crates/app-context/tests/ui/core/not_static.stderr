@@ -1,0 +1,18 @@
+error[E0597]: `text` does not live long enough
+ --> tests/ui/core/not_static.rs:4:37
+  |
+3 |     let text = String::from("local");
+  |         ---- binding `text` declared here
+4 |     let _ = Context::builder().with(text.as_str());
+  |             ------------------------^^^^----------
+  |             |                       |
+  |             |                       borrowed value does not live long enough
+  |             argument requires that `text` is borrowed for `'static`
+5 | }
+  | - `text` dropped here while still borrowed
+  |
+note: requirement that the value outlives `'static` introduced here
+ --> src/lib.rs
+  |
+  |     pub fn with<T: Send + Sync + 'static>(mut self, value: T) -> Result<Self, ContextError> {
+  |                                  ^^^^^^^

@@ -1,3 +1,4 @@
+//! test substitution verification for app-context.
 use app_context::{Context, ContextError};
 
 #[derive(Debug, PartialEq)]

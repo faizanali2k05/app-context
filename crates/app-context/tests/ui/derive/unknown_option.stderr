@@ -1,0 +1,5 @@
+error: supported context options are clone and default
+ --> tests/ui/derive/unknown_option.rs:3:26
+  |
+3 | struct State { #[context(secret)] value: u32 }
+  |                          ^^^^^^
