@@ -1,0 +1,37 @@
+error[E0277]: `Rc<{integer}>` cannot be sent between threads safely
+ --> tests/ui/core/not_send.rs:3:45
+  |
+3 | fn main() { let _ = Context::builder().with(Rc::new(1)); }
+  |                                        ---- ^^^^^^^^^^ `Rc<{integer}>` cannot be sent between threads safely
+  |                                        |
+  |                                        required by a bound introduced by this call
+  |
+  = help: the trait `Send` is not implemented for `Rc<{integer}>`
+note: required by a bound in `app_context::ContextBuilder::with`
+ --> src/lib.rs
+  |
+  |     pub fn with<T: Send + Sync + 'static>(mut self, value: T) -> Result<Self, ContextError> {
+  |                    ^^^^ required by this bound in `ContextBuilder::with`
+help: consider dereferencing here
+  |
+3 | fn main() { let _ = Context::builder().with(*Rc::new(1)); }
+  |                                             +
+
+error[E0277]: `Rc<{integer}>` cannot be shared between threads safely
+ --> tests/ui/core/not_send.rs:3:45
+  |
+3 | fn main() { let _ = Context::builder().with(Rc::new(1)); }
+  |                                        ---- ^^^^^^^^^^ `Rc<{integer}>` cannot be shared between threads safely
+  |                                        |
+  |                                        required by a bound introduced by this call
+  |
+  = help: the trait `Sync` is not implemented for `Rc<{integer}>`
+note: required by a bound in `app_context::ContextBuilder::with`
+ --> src/lib.rs
+  |
+  |     pub fn with<T: Send + Sync + 'static>(mut self, value: T) -> Result<Self, ContextError> {
+  |                           ^^^^ required by this bound in `ContextBuilder::with`
+help: consider dereferencing here
+  |
+3 | fn main() { let _ = Context::builder().with(*Rc::new(1)); }
+  |                                             +

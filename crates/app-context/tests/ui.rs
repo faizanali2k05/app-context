@@ -1,3 +1,4 @@
+//! ui verification for app-context.
 #[test]
 fn invalid_thread_safety_and_macro_inputs_are_rejected() {
     let tests = trybuild::TestCases::new();

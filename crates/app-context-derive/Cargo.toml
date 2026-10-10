@@ -5,6 +5,7 @@ edition.workspace = true
 rust-version.workspace = true
 license.workspace = true
 publish = false
+repository = "https://github.com/faizanali2k05/app-context"
 description = "Derive explicit typed sub-state extraction for app-context"
 readme = "README.md"
 documentation = "https://docs.rs/app-context-derive"

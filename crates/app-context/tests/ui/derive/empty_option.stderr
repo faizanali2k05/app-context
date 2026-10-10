@@ -1,0 +1,5 @@
+error: context requires clone or default
+ --> tests/ui/derive/empty_option.rs:3:16
+  |
+3 | struct State { #[context()] value: u32 }
+  |                ^^^^^^^^^^^^

@@ -1,3 +1,4 @@
+//! background worker verification for app-context.
 use app_context::{Context, ContextError};
 use std::{
     sync::atomic::{AtomicUsize, Ordering},

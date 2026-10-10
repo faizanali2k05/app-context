@@ -1,3 +1,4 @@
+//! core verification for app-context.
 use app_context::{Context, ContextBuilder, ContextError, FromContext};
 use std::{
     any::type_name,

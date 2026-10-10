@@ -40,3 +40,8 @@ be cloned before a later field lookup fails.
 Testing covers errors, aliases/newtypes, Arc identity/drop, immutable snapshots,
 threads, generic derives and compile failures plus actual framework request
 paths. This is not a parser or security boundary; parser fuzzing is inapplicable.
+
+MSRV is uniformly 1.88 for both packages and every optional integration. Although
+the std-only core may compile on earlier Rust, this avoids promising a lower
+version that optional frameworks and current macro dependencies cannot support.
+The workspace lockfile and CI preserve the checked resolution.

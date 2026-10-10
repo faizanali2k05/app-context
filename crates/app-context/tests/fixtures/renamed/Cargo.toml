@@ -1,0 +1,11 @@
+[package]
+name = "renamed-context-consumer"
+version = "0.0.0"
+edition = "2024"
+rust-version = "1.88"
+publish = false
+
+[workspace]
+
+[dependencies]
+app-state = { package = "app-context", path = "../../..", features = ["derive"] }

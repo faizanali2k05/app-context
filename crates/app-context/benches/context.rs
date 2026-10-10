@@ -1,3 +1,6 @@
+//! context verification for app-context.
+// Criterion generates a public harness function in this private benchmark binary.
+#![allow(missing_docs)]
 use app_context::Context;
 use criterion::{Criterion, black_box, criterion_group, criterion_main};
 

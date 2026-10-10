@@ -22,4 +22,9 @@ Primary references:
 - https://docs.rs/actix-web/latest/actix_web/trait.FromRequest.html
 - https://docs.rs/tonic/latest/tonic/service/trait.Interceptor.html
 
-Progress: design written before implementation; remaining milestones in STATUS.md.
+Progress: design, core, derive, adapters, docs, licenses, examples, benchmarks,
+local stable/MSRV checks and dependency audits completed. Derive package verification
+and dry-run passed. Remaining: remote platform CI, enable publication, publish derive,
+verify core against registry dependency and publish core. See STATUS.md and
+RELEASE_CHECKLIST.md. Publication authorization exists; remote Git push authorization
+is separately required by CODEX_PROMPT.md.
