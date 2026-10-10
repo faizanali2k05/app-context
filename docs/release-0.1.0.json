@@ -1,0 +1,62 @@
+{
+  "version": "0.1.0",
+  "date": "2026-10-10",
+  "source_commit": "3ebdeb312a6bb87dc080187ed373059ab033a9ac",
+  "ci_url": "https://github.com/faizanali2k05/app-context/actions/runs/38060656073",
+  "crates": [
+    {
+      "name": "app-context-derive",
+      "version": "0.1.0",
+      "url": "https://crates.io/crates/app-context-derive/0.1.0",
+      "sha256": "02094f85c4c3f4a668c360b7685c7ee8f9597dda9c931b15496c2828d36a472a",
+      "archive_files": 9,
+      "registry_checksum_matches": true,
+      "uploaded_archive_matches": true,
+      "source_files_match": true
+    },
+    {
+      "name": "app-context",
+      "version": "0.1.0",
+      "url": "https://crates.io/crates/app-context/0.1.0",
+      "sha256": "9faf034c7395a64f2ab1484ac5364d16e263fff219c6f911cf9e7356ebb03579",
+      "archive_files": 19,
+      "registry_checksum_matches": true,
+      "uploaded_archive_matches": true,
+      "source_files_match": true
+    }
+  ],
+  "ci_jobs": [
+    {
+      "name": "dependencies",
+      "result": "success"
+    },
+    {
+      "name": "test (macos-latest, stable)",
+      "result": "success"
+    },
+    {
+      "name": "test (macos-latest, 1.88.0)",
+      "result": "success"
+    },
+    {
+      "name": "test (ubuntu-latest, 1.88.0)",
+      "result": "success"
+    },
+    {
+      "name": "quality",
+      "result": "success"
+    },
+    {
+      "name": "test (windows-latest, stable)",
+      "result": "success"
+    },
+    {
+      "name": "test (windows-latest, 1.88.0)",
+      "result": "success"
+    },
+    {
+      "name": "test (ubuntu-latest, stable)",
+      "result": "success"
+    }
+  ]
+}
