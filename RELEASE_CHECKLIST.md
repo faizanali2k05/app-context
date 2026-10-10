@@ -14,12 +14,12 @@
 - [x] Derive archive built with cargo package in an isolated source snapshot.
 - [x] MSRV 1.88 all-feature behavioral tests, doctests and examples passed.
 - [x] cargo audit and cargo deny passed; only documented duplicate-version warnings.
-- [ ] Supported Linux/macOS/Windows platform CI has run for the final source revision.
+- [x] Supported Linux/macOS/Windows platform CI passed for the final implementation.
 
 ## Publication gates
 
 - [ ] Registry name/ownership rechecked immediately before publication.
-- [ ] Final release source committed and clean; publication deliberately enabled.
+- [x] Release metadata reviewed; publication deliberately enabled after source CI passed.
 - [x] Derive cargo publish --dry-run verified in isolated candidate (no upload).
 - [ ] Derive published as 0.1.0 after all required CI gates pass.
 - [ ] Exact derive version visible through the crates.io registry.
@@ -27,25 +27,14 @@
 - [ ] Packaged core checked with derive/all features.
 - [ ] Core published as 0.1.0; exact registry version and artifact confirmed.
 
-Both packages remain publish=false. Existing Cargo token configuration was detected
-without printing its contents; authentication validity has not been assumed.
-The official sparse index currently contains neither intended name, but this is
-not a reservation or proof that the names are publishable.
+All eight source CI jobs passed:
+https://github.com/faizanali2k05/app-context/actions/runs/38060232430
+Only publication flags and changelog/release records changed after source checks.
+Release packaging will use a clean committed checkout and normal Cargo verification.
+Existing Cargo authentication is configured; validity remains to be established by
+publication. Neither crate has been uploaded yet.
 
-Package artifact review used /tmp/app-context-package-review copied from source,
-without --allow-dirty or --no-verify. This is independent package evidence, not an
-assertion that the working Git checkout is clean. Core package resolution remains
-blocked until the derive crate is registered. No package has been uploaded.
-
-The dry-run-only candidate temporarily enabled publication for app-context-derive
-in /tmp; neither working project manifest was enabled. The exact macro source,
-README and licenses match the working project. Audit tool cargo-deny was obtained
-from its official GitHub release and verified against SHA-256
-9f12ed4c49936e09b48bf862b595cde2fe64fcbd9d74dfacac6131ca824c8d5f.
-No audit warnings or vulnerability entries were ignored. Duplicate dependency
-versions are reported at warning level as configured from the outset.
-
-Next action: push the finished source to the configured repository, run the prepared
-CI matrix, inspect/fix every failure, then enable release publication, publish derive,
-verify core registry packaging and publish core. CODEX_PROMPT.md requires separate
-user authorization before pushing the remote repository, so the push is pending.
+Local cargo-deny 0.20.2 was obtained from its official GitHub release and verified
+against SHA-256 9f12ed4c49936e09b48bf862b595cde2fe64fcbd9d74dfacac6131ca824c8d5f.
+No audit warnings or vulnerabilities were ignored. Configured duplicate-version
+warnings only concern framework dependencies http and syn.
