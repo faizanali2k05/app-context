@@ -22,10 +22,9 @@ Primary references:
 - https://docs.rs/actix-web/latest/actix_web/trait.FromRequest.html
 - https://docs.rs/tonic/latest/tonic/service/trait.Interceptor.html
 
-Progress: design, core, derive, adapters, documentation, licenses, examples,
-benchmarks, stable/MSRV checks and dependency audits completed. All eight remote CI
-jobs passed for the final implementation, including Windows and macOS. Publication
-was deliberately enabled after these gates; user authorized the remote upload.
-Remaining: clean-source final packaging/dry-run, derive publication and registry
-confirmation, core registry packaging/dry-run and publication. See STATUS.md and
-RELEASE_CHECKLIST.md for evidence and exact release results.
+Progress: all six milestones completed. Implemented and validated the complete
+SPEC.md and QUALITY.md contract. Eight CI jobs passed on the exact release commit,
+including Windows/macOS/Linux and stable/MSRV. Published derive first, confirmed
+registry availability, verified the core archive with the registry derive crate,
+then published core. Both exact 0.1.0 registry versions and archive checksums match
+the completed source. See STATUS.md, RELEASE_CHECKLIST.md and release-0.1.0.json.

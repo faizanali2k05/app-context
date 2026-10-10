@@ -1,6 +1,6 @@
 # Status
 
-Implementation complete; all source release checks passed. Registry publication in progress.
+Completed and published: app-context 0.1.0 and app-context-derive 0.1.0.
 
 ## Implemented
 
@@ -36,17 +36,26 @@ Implementation complete; all source release checks passed. Registry publication 
 - Derive cargo publish --dry-run passed in the isolated candidate directory; upload
   explicitly aborted by Cargo as a dry run. Publication was enabled after all required source CI checks passed.
 
-## Release progress
+## Published release: 0.1.0
 
-- User authorized uploading the completed source to the existing GitHub repository.
-- GitHub source commit f218ee2f2c74e1ab1f34b389122ad546a85feefb exactly matches
-  the locally validated source tree 7f9cab64ec5f4e296244065cadd1f7db42d08380.
-- All eight GitHub Actions jobs passed: stable/MSRV tests on Linux/macOS/Windows,
-  formatting/Clippy/UI/docs/benchmarks and dependency/security checks.
-  https://github.com/faizanali2k05/app-context/actions/runs/38060232430
-- Only release metadata and changelog dates changed after those source checks.
-- Both manifests intentionally enabled for publication after these gates passed.
-- Pending: fresh registry name checks, final clean-source derive package/dry-run
-  and publication, exact registry confirmation, core package/dry-run and publication.
+- app-context-derive: https://crates.io/crates/app-context-derive/0.1.0
+- app-context: https://crates.io/crates/app-context/0.1.0
+- Published from clean GitHub commit 3ebdeb312a6bb87dc080187ed373059ab033a9ac.
+- All eight release CI jobs passed for that exact commit: stable/MSRV behavioral
+  tests, doctests, examples and feature checks on Linux/macOS/Windows; quality and
+  dependency/security jobs.
+  https://github.com/faizanali2k05/app-context/actions/runs/38060656073
+- Rechecked both names immediately before release. Cargo accepted existing secure
+  authentication; derive was published first and confirmed in the registry.
+- Both package lists reviewed, both archives built and both publish dry runs passed.
+- Core cargo package and cargo publish --dry-run used --all-features --locked
+  against the published registry derive dependency.
+- The unpacked core archive passed its 2 unit tests, 6 doctests and all-feature
+  example builds before publication.
+- Published core with --all-features --locked after those gates. No dirty-source
+  or verification bypass flags were used.
+- Independently downloaded both official registry artifacts. SHA-256 checksums,
+  normalized manifest identities, clean VCS metadata, source/docs/license contents
+  and exact uploaded archives match. See docs/release-0.1.0.json.
 
-No crates have been published yet. Cargo authentication validity is not assumed.
+No remaining implementation or release blockers for this initial release.
