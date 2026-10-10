@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.0 (unreleased)
+## 0.1.0 (2026-10-10)
 
 - Immutable typed Context and explicit duplicate/missing errors.
 - Arc and borrowed retrieval, immutable context clones, independent scoped overrides.
